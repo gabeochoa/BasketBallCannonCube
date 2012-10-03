@@ -3,9 +3,13 @@ package com.gabeochoa.objects;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import com.gabeochoa.Vector2D;
+
 public class Entity {
 
 	public int mass = 3;
+	
+	public Vector2D speed;
 	public double x,y;
 	public double vx,vy;
 	public int radius;
@@ -23,6 +27,9 @@ public class Entity {
 		setRadius(20);
 		vx = 1;
 		vy = 1;
+		
+		speed = new Vector2D( vx, vy); 
+		
 	}
 	
 	public Entity(int x, int y, int vx, int vy)
@@ -59,8 +66,8 @@ public class Entity {
 		  }
 		  
 		  if (x <= 0) {
-			  x = 0;
-			  vx = vx/3.0;
+			  x = getRadius();
+			  vx = -vx/bounceFactor;
 		  }
 		}
 
@@ -83,7 +90,16 @@ public class Entity {
 			vy-= 0.05;
 		}
 	}
-
+	public Vector2D getVector()
+	{
+		speed = new Vector2D(vx,vy);
+		return speed;
+	}
+	
+	public void addVector(Vector2D v2d)
+	{
+		speed.add(v2d);
+	}
 	public void paint(Graphics gr)
 	{
 		g = gr;

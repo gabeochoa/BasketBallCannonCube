@@ -8,6 +8,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.JFrame;
 
@@ -147,9 +148,11 @@ public class BasketBallCannonCube extends JFrame implements Runnable{
 		 g.drawLine(00, 500, WIDTH, 500);
 		 g.drawLine(500, 0, 500, HEIGHT);
 			
-		
+
+		 g.drawLine((int)player.getCenterX(), (int)player.getCenterY(), mouseX, mouseY);
+		 
 		player.getInput(mouseX, mouseY);
-		
+		//System.out.println(""+mouseX+"  , "+mouseY);
 		checkCollision();
 		
 		ln = entities.size();
@@ -182,32 +185,62 @@ public class BasketBallCannonCube extends JFrame implements Runnable{
 
 	public void addEntity(double time)
 	 {
-		if(entities.size() > 50)
+		if(entities.size() > 1)
 		 entities.remove(1);
 			
-		 Ball b = new Ball(getSpawnX(), getSpawnY());
-		 b.setVX(time * 4  + 1);
-		 System.out.println(""+time);
-		 player.setVX(time*-b.vx);
+		 Ball b = new Ball(player.getCenterX(), player.getCenterY());//(getSpawnX(), getSpawnY());
+		 
+		 b.setVX(getVelocityX() * 10 * time);
+		 b.setVY(getVelocityY() * 10 * time);
+		 
+		 System.out.println(""+Math.toDegrees(getVelocityX()));
+		// player.setVX(time*-b.vx);
 		 
 		 entities.add(b);
 	 }
-	 
+	
+	 private double getVelocityX() {
+		 double dy = (mouseY - player.getCenterY());
+		 double dx = (mouseX - player.getCenterX());
+		 
+		 Vector2D dir = new Vector2D(dx,dy);
+		 
+		 double angle = Math.atan(dy/dx);
+		
+			 return  (angle);
+	 }
+		 
+	private double getVelocityY() {
+			 double dy =  (player.getCenterY() - mouseY);
+			 double dx =  (mouseX - player.getCenterX());
+			 
+			 double angle = Math.atan(dy/dx);
+			 	 
+			 return  -Math.sin(angle);
+		
+	}
 	 private double getSpawnX() {
 		 double dy =  (mouseY - player.y);
 		 double dx =  (mouseX - player.x);
 		 
-		 double angle = Math.atan(Math.toRadians(dy/dx));
+		 double angle = Math.atan((dy/dx));
 		 
+		 if(angle < 0)
 		 return player.getCenterX() + ( 20 * Math.cos(angle));
+		 else
+		 return player.getCenterX() - (20 * Math.cos(angle));
+		 
 	} 
 	 private double getSpawnY() {
 		 double dy =  (mouseY - player.y);
 		 double dx =  (mouseX - player.x);
 		 
-		 double angle = Math.atan(Math.toRadians(dy/dx));
-		 		 
-		 return  player.getCenterY() +( 20 * Math.sin(angle));
+		 double angle = Math.atan((dy/dx));
+
+		 if(angle < 0)
+		 return player.getCenterY() + (20 * Math.sin(angle));
+		 else
+		 return player.getCenterY() - (20 * Math.sin(angle));
 	}
 
 	 
