@@ -6,6 +6,7 @@ import java.awt.event.*;
 public class InputHandler implements KeyListener, FocusListener, MouseListener, MouseMotionListener {
     public boolean[] keys = new boolean[65536];
     public int[] mouse = new int[5];
+    private boolean elapsedTimeStarted = false;
 	
     private long startTime;
 	private double elapsedTime;
@@ -63,8 +64,12 @@ public class InputHandler implements KeyListener, FocusListener, MouseListener, 
             keys[code] = true;
         }
         
-        if(keys[KeyEvent.VK_SPACE])
-        	startTime = System.nanoTime();
+        if(keys[KeyEvent.VK_SPACE]&& !elapsedTimeStarted)
+        {
+        	System.out.println("Time started");
+        	elapsedTimeStarted = true;
+        	startTime = System.currentTimeMillis();
+        }
         
     }
 
@@ -76,7 +81,10 @@ public class InputHandler implements KeyListener, FocusListener, MouseListener, 
         
         if(!keys[KeyEvent.VK_SPACE])
         	{
-        		elapsedTime =  (double) ((System.nanoTime() - startTime) / 1000000000.0);
+        	    System.out.println("Time stopped");
+        	    elapsedTimeStarted = false;
+        	    System.out.println(((System.currentTimeMillis() - startTime) +""));
+        		elapsedTime =  (double) ((System.currentTimeMillis() - startTime) / 1000.0);
         		BBCC.addEntity(elapsedTime);
         	}
  
