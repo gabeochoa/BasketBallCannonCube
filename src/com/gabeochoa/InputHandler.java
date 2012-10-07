@@ -66,7 +66,7 @@ public class InputHandler implements KeyListener, FocusListener, MouseListener, 
         
         if(keys[KeyEvent.VK_SPACE]&& !elapsedTimeStarted)
         {
-        	System.out.println("Time started");
+        	//System.out.println("Time started");
         	elapsedTimeStarted = true;
         	startTime = System.currentTimeMillis();
         }
@@ -79,12 +79,14 @@ public class InputHandler implements KeyListener, FocusListener, MouseListener, 
             keys[code] = false;
         }
         
-        if(!keys[KeyEvent.VK_SPACE])
+        if(!keys[KeyEvent.VK_SPACE] && elapsedTimeStarted)
         	{
-        	    System.out.println("Time stopped");
+        	    //System.out.println("Time stopped");
         	    elapsedTimeStarted = false;
-        	    System.out.println(((System.currentTimeMillis() - startTime) +""));
+        	    //System.out.println(((System.currentTimeMillis() - startTime) +""));
         		elapsedTime =  (double) ((System.currentTimeMillis() - startTime) / 1000.0);
+        		if(elapsedTime > 2)
+        			elapsedTime =2;
         		BBCC.addEntity(elapsedTime);
         	}
  

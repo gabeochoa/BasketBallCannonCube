@@ -74,7 +74,7 @@ public class Entity {
 	public void update()
 	{
 		boundaryChecks();
-		gravity();
+		//gravity();
 		x += vx;
 		y += vy;
 	}
