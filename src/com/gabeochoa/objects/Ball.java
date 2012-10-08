@@ -12,7 +12,7 @@ public class Ball extends Entity {
 	public Ball(double d, double e)
 	{
 		super(d, e, 0, 3);
-		radius = 10;
+		radius = 12;
 	}
 
 	public void paint(Graphics gr)

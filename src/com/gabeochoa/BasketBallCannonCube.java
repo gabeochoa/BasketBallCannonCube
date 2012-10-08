@@ -5,10 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Vector;
 
 import javax.swing.JFrame;
 
@@ -34,19 +31,12 @@ public class BasketBallCannonCube extends JFrame implements Runnable{
 	private final int HEIGHT = 600;
 	private Dimension size;
 
-
 	private boolean running;
 	private Thread thread;
-	
 
     public InputHandler inputHandler;
     public boolean keys[];
     public int mouseButton, mouseX,mouseY;
-
-
-	private long startTime;
-	private long timePassed;
-
 
 	private int ln;
 	
@@ -79,9 +69,6 @@ public class BasketBallCannonCube extends JFrame implements Runnable{
 		
 		player= new Player();	
 		entities.add(player);
-		
-		Ball b = new Ball();
-		entities.add(b);
 	}
 	
 	 public void run()
@@ -190,14 +177,15 @@ public class BasketBallCannonCube extends JFrame implements Runnable{
 		 Ball b = new Ball(getSpawn().x, getSpawn().y);
 		 
 		 double velocity = 10*time;
-		 if(velocity > 8)
-		 {
-			 velocity = 8;
-		 }
-		 System.out.println(velocity);
+		 if(velocity > 10)
+			 velocity = 10;
+		 System.out.print(velocity);
+		 
 		 b.setVX( getVelocityX(velocity));
 		 b.setVY( getVelocityY(velocity));
 		
+		 player.setVX(player.vx - (b.vx/5));
+		 player.setVY(player.vy - (b.vy/5));
 		 
 		 entities.add(b);
 	 }
@@ -242,7 +230,7 @@ public class BasketBallCannonCube extends JFrame implements Runnable{
 
 		 double vy = Math.sin(angle) * vel;
 		 
-		if(dx > 0 && dy < 0)//if the mouse if northeast of the box
+		 if(dx > 0 && dy < 0)//if the mouse if northeast of the box
 		 {
 			vy = -Math.abs(vy);
 		 }
@@ -271,8 +259,6 @@ public class BasketBallCannonCube extends JFrame implements Runnable{
 		 
 		 double dy =  (mouseY - player.getCenterY());
 		 double dx =  (mouseX - player.getCenterX());
-		 
-		 double angle = Math.atan((dy/dx));
  
 		 double px; 
 		 double py;
@@ -314,7 +300,6 @@ public class BasketBallCannonCube extends JFrame implements Runnable{
 		 
 	}
 
-	 
 	
 	private void handleKeysAndMouse(boolean[] k, int[] m) {
 
