@@ -6,12 +6,10 @@ import java.awt.Graphics;
 public class Player extends Entity{
 
 	Graphics g;
-	private int mouseY;
-	private int mouseX;
 	
 	public int bounceFactor = 8;
 	public int slideFactor = 8;
-	public int mass = 28;
+	public int mass = 20;
 	
 	public Player()
 	{
@@ -22,11 +20,7 @@ public class Player extends Entity{
 	{
 		super(x, y, vx, vy);
 	}
-	public void getInput(int mx, int my)
-	{
-		mouseX = mx;
-		mouseY = my;
-	}
+	
 	public void update()
 	{
 		super.update();

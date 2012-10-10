@@ -134,11 +134,9 @@ public class BasketBallCannonCube extends JFrame implements Runnable{
 		 g.setColor(Color.black);
 		 g.drawLine(00, 500, WIDTH, 500);
 		 g.drawLine(500, 0, 500, HEIGHT);
-			
-
+		
 		 g.drawLine((int)player.getCenterX(), (int)player.getCenterY(), mouseX, mouseY);
 		 
-		player.getInput(mouseX, mouseY);
 		checkCollision();
 		
 		ln = entities.size();
@@ -184,8 +182,8 @@ public class BasketBallCannonCube extends JFrame implements Runnable{
 		 b.setVX( getVelocityX(velocity));
 		 b.setVY( getVelocityY(velocity));
 		
-		 player.setVX(player.vx - (b.vx/5));
-		 player.setVY(player.vy - (b.vy/5));
+		 player.setVX(player.vx - (b.vx * .8));
+		 player.setVY(player.vy - (b.vy * .8));
 		 
 		 entities.add(b);
 	 }
@@ -209,12 +207,12 @@ public class BasketBallCannonCube extends JFrame implements Runnable{
 			 vx = Math.abs(vx);
 		 }
 		 
-		 if(dx < 0 && dy < 0)//if the mouse if northwest of the box
+		 if(dx <= 0 && dy <= 0)//if the mouse if northwest of the box
 		 {
 			 vx = -Math.abs(vx);
 		 }
 		 
-		 if(dx < 0 && dy > 0)//if the mouse if southwest of the box
+		 if(dx <= 0 && dy >= 0)//if the mouse if southwest of the box
 		 {
 			 vx = -Math.abs(vx);
 		 }
@@ -240,12 +238,12 @@ public class BasketBallCannonCube extends JFrame implements Runnable{
 			 vy = Math.abs(vy);
 		 }
 		 
-		 if(dx < 0 && dy < 0)//if the mouse if northwest of the box
+		 if(dx <= 0 && dy <= 0)//if the mouse if northwest of the box
 		 {
 			 vy = -Math.abs(vy);
 		 }
 		 
-		 if(dx < 0 && dy > 0)//if the mouse if southwest of the box
+		 if(dx <= 0 && dy >= 0)//if the mouse if southwest of the box
 		 {
 			 vy = Math.abs(vy);
 		 }
@@ -276,22 +274,22 @@ public class BasketBallCannonCube extends JFrame implements Runnable{
 		 if(dx > 0 && dy > 0)//if the mouse if southeast of the box
 		 {
 			 px = player.getCenterX() + 20;
-			 py = player.getCenterY() + 20;
+			 py = player.getCenterY() + 40;
 			 
 			 s = new Point( (int) Math.round(px), (int) Math.round(py));
 		 }
 		 
-		 if(dx < 0 && dy < 0)//if the mouse if northwest of the box
+		 if(dx <= 0 && dy <= 0)//if the mouse if northwest of the box
 		 {
 			 px = player.getCenterX() - 20;
 			 py = player.getCenterY() - 20;
 			 
 			 s = new Point( (int) Math.round(px), (int) Math.round(py));
 		 }
-		 if(dx < 0 && dy > 0)//if the mouse if southwest of the box
+		 if(dx <= 0 && dy >= 0)//if the mouse if southwest of the box
 		 {
 			 px = player.getCenterX() - 20;
-			 py = player.getCenterY() + 20;
+			 py = player.getCenterY() + 40;
 			 
 			 s = new Point( (int) Math.round(px), (int) Math.round(py));
 		 }

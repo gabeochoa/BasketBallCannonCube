@@ -53,8 +53,8 @@ public class Entity {
 		    vy = -vy/bounceFactor ;
 		  }
 		  if (y <= getRadius()) {
-		 //   y = getRadius();
-		 //   vy = -vy/1.5;
+		     //   y = getRadius();
+		     //   vy = -vy/1.5;
 		  }
 		  if (x >= width - getRadius()) {
 		    x = width -getRadius();
@@ -87,7 +87,8 @@ public class Entity {
 		
 		if(y >= height - getRadius())
 		{
-			vy-= 0.105;
+			y = height - getRadius();
+			//vy-= 0.105;
 		}
 	}
 	public Vector2D getVector()
